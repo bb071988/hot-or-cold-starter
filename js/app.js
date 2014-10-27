@@ -22,24 +22,39 @@ $(document).ready(function(){
    	$('#guessButton')
 		.on('click', function(event) {  
   		var guessValue = $('#userGuess').val();
-  		
-  		var tempObj = getTemp(guessValue, compGuess); // set this up to return an object for fun
 
-      /* clear out the feedback div on the form and set to guess color */
-  		$('#feedback').empty();
-      $('#feedback').append(tempObj.guessColor);
+      if(guessValue >0  && guessValue < 101) {
 
+      		var tempObj = getTemp(guessValue, compGuess); // set this up to return an object for fun
 
-      /* increment the guessCount and display in the count div */
-  		guessCount = guessCount + 1;
-      $('#count').empty();
-      $('#count').append(guessCount);
+          /* clear out the feedback div on the form and set to guess color */
+      		$('#feedback').empty();
+          $('#feedback').append(tempObj.guessColor);
 
 
-      /* withouth prefentDefault the click event bubbles up and a new random number is generated
-      for each guess */
+          /* increment the guessCount and display in the count div */
+      		guessCount = guessCount + 1;
+          $('#count').empty();
+          $('#count').append(guessCount);
 
-  		event.preventDefault();
+          $('#guessList').append(guessValue + '  '); // append guesses to list
+
+
+          /* withouth prefentDefault the click event bubbles up and a new random number is generated
+          for each guess */
+
+      		event.preventDefault();
+      }
+
+     else if(guessValue> 100 || guessValue < 1)
+      {alert('Please pick a number between 1 and 100');
+        event.preventDefault();
+      }
+
+      else if(isNan(guessValue))
+        { alert('Sorry No Letters Allowed \n Please pick a number between 1 and 100');
+          event.preventDefault();
+        };
   		  		
 	});
 
@@ -59,6 +74,8 @@ $(document).ready(function(){
       $('#count').append(guessCount);
 
       var compGuess = getRand();
+
+      $('#guessList').empty();
 
 
       $('#myForm').trigger("reset"); // had to add the myForm ID to html naming form to reset it here
