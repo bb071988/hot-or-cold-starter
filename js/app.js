@@ -23,6 +23,7 @@ $(document).ready(function(){
 		.on('click', function(event) {  
   		var guessValue = $('#userGuess').val();
 
+
       if(guessValue >0  && guessValue < 101) {
 
       		var tempObj = getTemp(guessValue, compGuess); // set this up to return an object for fun
@@ -39,11 +40,14 @@ $(document).ready(function(){
 
           $('#guessList').append(guessValue + '  '); // append guesses to list
 
-
+          $('#userGuess').val(''); // clear out the guess 
+          
           /* withouth prefentDefault the click event bubbles up and a new random number is generated
           for each guess */
 
       		event.preventDefault();
+
+
       }
 
      else if(guessValue> 100 || guessValue < 1)
